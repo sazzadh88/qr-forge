@@ -30,7 +30,9 @@ export async function startSession(userId: number) {
   (await cookies()).set(COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    // Secure only over https (direct or behind a proxy). Browsers drop Secure cookies on plain http
+    // except on localhost, which would break login when the app is opened by LAN IP.
+    secure: Boolean((await headers()).get("x-forwarded-proto")?.includes("https")),
     maxAge: TTL / 1000,
     path: "/",
   });
