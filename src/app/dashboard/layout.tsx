@@ -12,6 +12,7 @@ const NAV: [string, string, string][] = [
   ["/dashboard/analytics", "Analytics", "M4 20V10M10 20V4M16 20v-7M22 20H2"],
   ["/dashboard/templates", "Templates", "M4 4h16v6H4zM4 14h7v6H4zM15 14h5v6h-5z"],
   ["/dashboard/bulk", "Bulk creation", "M4 6h16M4 12h16M4 18h10"],
+  ["/dashboard/plans-and-payments", "Plans & payments", "M2 7h20v12H2zM2 11h20M6 15h4"],
   ["/dashboard/settings", "Settings", "M12 15a3 3 0 100-6 3 3 0 000 6zM19 12a7 7 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 00-2-1.2L14 3h-4l-.5 2.6a7 7 0 00-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 000 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 002 1.2L10 21h4l.5-2.6a7 7 0 002-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"],
 ];
 
