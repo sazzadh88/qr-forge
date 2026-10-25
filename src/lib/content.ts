@@ -26,14 +26,3 @@ export const FAQ: { group: string; items: [string, string][] }[] = [
     ],
   },
 ];
-
-export type Plan = { id: "starter" | "pro" | "business"; name: string; monthly: number; yearly: number; popular?: boolean; features: string[] };
-
-export const PLANS: Plan[] = [
-  { id: "starter", name: "Starter", monthly: 0, yearly: 0, features: ["Unlimited static QR codes", "5 dynamic QR codes", "Basic scan statistics", "PNG, JPG & SVG downloads"] },
-  { id: "pro", name: "Pro", monthly: 9, yearly: 90, popular: true, features: ["Unlimited dynamic QR codes", "All 19 QR types", "Full analytics", "Templates & folders", "Password protection"] },
-  { id: "business", name: "Business", monthly: 29, yearly: 290, features: ["Everything in Pro", "Bulk creation", "REST API access", "Priority support"] },
-];
-
-// Billing isn't connected, so every account effectively runs on the top plan.
-export const CURRENT_PLAN: Plan["id"] = "business";

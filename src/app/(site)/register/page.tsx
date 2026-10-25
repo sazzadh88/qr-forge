@@ -8,7 +8,7 @@ export default async function Register({ searchParams }: PageProps<"/register">)
   const { error, next } = await searchParams;
   return (
     <AuthCard title="Create your free account">
-      <p className="mt-1 text-sm text-slate-600">Dynamic codes, hosted pages and analytics. No credit card.</p>
+      <p className="mt-1 text-sm text-slate-600">Every feature included: dynamic codes, hosted pages, analytics, bulk and API.</p>
       <form action={register} className="mt-6 space-y-4">
         <input type="hidden" name="next" value={typeof next === "string" ? next : ""} />
         {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}

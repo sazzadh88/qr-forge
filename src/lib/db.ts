@@ -93,10 +93,13 @@ export function insertQr(userId: number, q: { name: string; type: QrType; folder
 export const folderOwned = (userId: number, id: number | null) =>
   id === null || Boolean(db.prepare("SELECT 1 FROM folders WHERE id=? AND user_id=?").get(id, userId));
 
+// Spread into plain objects: node:sqlite rows have a null prototype, which can't be passed to Client Components.
 export const listFolders = (userId: number) =>
-  db
-    .prepare("SELECT f.id, f.name, COUNT(q.id) n FROM folders f LEFT JOIN qrcodes q ON q.folder_id=f.id WHERE f.user_id=? GROUP BY f.id ORDER BY f.name")
-    .all(userId) as { id: number; name: string; n: number }[];
+  (
+    db
+      .prepare("SELECT f.id, f.name, COUNT(q.id) n FROM folders f LEFT JOIN qrcodes q ON q.folder_id=f.id WHERE f.user_id=? GROUP BY f.id ORDER BY f.name")
+      .all(userId) as { id: number; name: string; n: number }[]
+  ).map((f) => ({ ...f }));
 
 export const listTemplates = (userId: number) =>
   (db.prepare("SELECT id, name, design FROM templates WHERE user_id=? ORDER BY id DESC").all(userId) as { id: number; name: string; design: string }[]).map((t) => ({

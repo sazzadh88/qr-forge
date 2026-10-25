@@ -136,11 +136,13 @@ export async function deleteFolder(fd: FormData) {
 
 // ---------- templates ----------
 
-export async function saveTemplate(name: string, design: Design) {
+export async function saveTemplate(name: string, design: Design, id?: number) {
   const user = await requireUser();
   const n = String(name ?? "").trim().slice(0, 60);
   if (!n) return;
-  db.prepare("INSERT INTO templates (user_id, name, design) VALUES (?,?,?)").run(user.id, n, JSON.stringify({ ...DEFAULT_DESIGN, ...design }));
+  const json = JSON.stringify({ ...DEFAULT_DESIGN, ...design });
+  if (id) db.prepare("UPDATE templates SET name=?, design=? WHERE id=? AND user_id=?").run(n, json, id, user.id);
+  else db.prepare("INSERT INTO templates (user_id, name, design) VALUES (?,?,?)").run(user.id, n, json);
   revalidatePath("/dashboard/templates");
 }
 

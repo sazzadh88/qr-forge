@@ -19,17 +19,19 @@ export default function Editor({
   initial,
   folders,
   templates,
+  startDesign,
 }: {
   type: QrType;
   origin: string;
   initial?: Initial;
   folders: { id: number; name: string }[];
   templates: { id: number; name: string; design: Design }[];
+  startDesign?: Design;
 }) {
   const [name, setName] = useState(initial?.name ?? "");
   const [folderId, setFolderId] = useState(initial?.folderId ?? null);
   const [content, setContent] = useState<Record<string, unknown>>(initial?.content ?? {});
-  const [design, setDesign] = useState<Design>(initial?.design ?? DEFAULT_DESIGN);
+  const [design, setDesign] = useState<Design>(initial?.design ?? startDesign ?? DEFAULT_DESIGN);
   const [password, setPassword] = useState("");
   const [removePassword, setRemovePassword] = useState(false);
   const [error, setError] = useState("");

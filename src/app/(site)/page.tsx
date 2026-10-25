@@ -94,7 +94,7 @@ export default function Home() {
       <section className="px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-5xl rounded-3xl bg-brand px-6 py-14 text-center text-white">
           <h2 className="text-3xl font-bold">Ready to make yours?</h2>
-          <p className="mt-2 text-white/80">Free account, no credit card, all features.</p>
+          <p className="mt-2 text-white/80">Free account with every feature included.</p>
           <Link href="/register" className="mt-6 inline-block rounded-full bg-white px-6 py-3 font-semibold text-brand hover:bg-brand-50">
             Register now
           </Link>

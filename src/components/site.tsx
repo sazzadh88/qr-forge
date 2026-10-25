@@ -48,9 +48,6 @@ export async function SiteHeader() {
               Features
             </Link>
           </Dropdown>
-          <Link href="/pricing" className="hover:text-brand">
-            Plans and prices
-          </Link>
           <Link href="/faq" className="hover:text-brand">
             FAQ
           </Link>
@@ -89,7 +86,6 @@ export function SiteFooter() {
           </Link>
           <p className="mt-2 text-sm text-slate-500">Custom QR codes with hosted pages and scan analytics.</p>
           <div className="mt-4 flex flex-col gap-1 text-sm text-slate-600">
-            <Link href="/pricing" className="hover:text-brand">Plans and prices</Link>
             <Link href="/faq" className="hover:text-brand">FAQ</Link>
             <Link href="/api-docs" className="hover:text-brand">API</Link>
           </div>
