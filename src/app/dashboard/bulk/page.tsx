@@ -2,7 +2,7 @@ import { requireUser } from "@/lib/auth";
 import { listTemplates } from "@/lib/db";
 import { bulkCreate } from "@/lib/actions";
 
-const input = "mt-1.5 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm";
+const input = "mt-1.5 w-full rounded-lg border border-ink/20 px-3 py-2.5 text-sm";
 
 export default async function Bulk({ searchParams }: PageProps<"/dashboard/bulk">) {
   const user = await requireUser();
@@ -12,7 +12,7 @@ export default async function Bulk({ searchParams }: PageProps<"/dashboard/bulk"
     <div className="mx-auto max-w-3xl">
       <h1 className="text-2xl font-bold">Bulk creation</h1>
       <p className="text-sm text-slate-500">Create up to 500 dynamic website QR codes at once. They land in a new folder, ready to download.</p>
-      <form action={bulkCreate} className="mt-6 space-y-5 rounded-xl border border-slate-200 bg-white p-6">
+      <form action={bulkCreate} className="mt-6 space-y-5 rounded-lg border border-ink/10 bg-white p-6">
         {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{String(error)}</p>}
         <label className="block text-sm font-medium">
           Rows — one <code className="rounded bg-slate-100 px-1">name,url</code> per line
@@ -39,7 +39,7 @@ export default async function Bulk({ searchParams }: PageProps<"/dashboard/bulk"
             </select>
           </label>
         </div>
-        <button className="rounded-full bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-600">Create QR codes</button>
+        <button className="rounded-md bg-ink px-6 py-2.5 text-sm font-semibold text-paper hover:bg-ember hover:text-ink">Create QR codes</button>
       </form>
     </div>
   );

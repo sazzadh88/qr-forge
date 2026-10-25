@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { logout } from "@/lib/actions";
-import { Logo } from "@/components/icons";
+import { Wordmark } from "@/components/icons";
 import { NavLink } from "@/components/dash";
 
 export const metadata = { title: "Dashboard · QRForge" };
@@ -18,11 +18,11 @@ const NAV: [string, string, string][] = [
 export default async function DashboardLayout({ children }: LayoutProps<"/dashboard">) {
   const user = await requireUser();
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 md:flex-row">
-      <aside className="border-b border-slate-200 bg-white md:sticky md:top-0 md:h-screen md:w-64 md:shrink-0 md:border-r md:border-b-0">
+    <div className="flex min-h-screen flex-col bg-paper md:flex-row">
+      <aside className="grid-bg bg-ink text-paper md:sticky md:top-0 md:h-screen md:w-60 md:shrink-0">
         <div className="flex h-16 items-center px-5">
-          <Link href="/" className="flex items-center gap-2 text-lg font-extrabold">
-            <Logo /> QRForge
+          <Link href="/">
+            <Wordmark />
           </Link>
         </div>
         <nav className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-col md:pb-0">
@@ -34,15 +34,15 @@ export default async function DashboardLayout({ children }: LayoutProps<"/dashbo
               {label}
             </NavLink>
           ))}
-          <Link href="/api-docs" className="rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 md:mt-4">
+          <Link href="/api-docs" className="rounded-md px-3 py-2 text-sm text-paper/50 hover:text-paper md:mt-4">
             API docs ↗
           </Link>
         </nav>
-        <div className="hidden border-t border-slate-200 p-4 md:absolute md:bottom-0 md:block md:w-full">
+        <div className="hidden border-t border-paper/10 p-4 md:absolute md:bottom-0 md:block md:w-full">
           <p className="truncate text-sm font-semibold">{user.name}</p>
-          <p className="truncate text-xs text-slate-500">{user.email}</p>
+          <p className="truncate text-xs text-paper/50">{user.email}</p>
           <form action={logout}>
-            <button className="mt-2 text-sm text-slate-600 hover:text-brand">Log out</button>
+            <button className="mt-2 text-sm text-paper/70 hover:text-ember">Log out</button>
           </form>
         </div>
       </aside>

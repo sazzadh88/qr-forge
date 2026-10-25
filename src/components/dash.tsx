@@ -7,7 +7,7 @@ export function NavLink({ href, children }: { href: string; children: React.Reac
   const path = usePathname();
   const on = href === "/dashboard" ? path === href : path.startsWith(href);
   return (
-    <Link href={href} className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap ${on ? "bg-brand-50 text-brand" : "text-slate-600 hover:bg-slate-100"}`}>
+    <Link href={href} className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium whitespace-nowrap ${on ? "bg-paper text-ink" : "text-paper/70 hover:bg-paper/10 hover:text-paper"}`}>
       {children}
     </Link>
   );

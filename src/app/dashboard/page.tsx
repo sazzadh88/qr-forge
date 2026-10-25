@@ -42,15 +42,15 @@ export default async function MyQrCodes({ searchParams }: PageProps<"/dashboard"
       <div className="min-w-0">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-2xl font-bold">{current ? current.name : "My QR codes"}</h1>
-          <Link href="/dashboard/new" className="rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white hover:bg-brand-600">
+          <Link href="/dashboard/new" className="rounded-md bg-ink px-5 py-2 text-sm font-semibold text-paper hover:bg-ember hover:text-ink">
             + Create QR code
           </Link>
         </div>
 
-        <form className="mt-5 flex flex-wrap gap-2 rounded-xl border border-slate-200 bg-white p-3">
+        <form className="mt-5 flex flex-wrap gap-2 rounded-lg border border-ink/10 bg-white p-3">
           {folder > 0 && <input type="hidden" name="folder" value={folder} />}
-          <input name="q" defaultValue={q} placeholder="Search by name" className="min-w-40 flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" />
-          <select name="type" defaultValue={type} className="rounded-lg border border-slate-300 px-3 py-2 text-sm">
+          <input name="q" defaultValue={q} placeholder="Search by name" className="min-w-40 flex-1 rounded-lg border border-ink/20 px-3 py-2 text-sm" />
+          <select name="type" defaultValue={type} className="rounded-lg border border-ink/20 px-3 py-2 text-sm">
             <option value="">All types</option>
             {TYPE_KEYS.map((t) => (
               <option key={t} value={t}>
@@ -58,7 +58,7 @@ export default async function MyQrCodes({ searchParams }: PageProps<"/dashboard"
               </option>
             ))}
           </select>
-          <select name="status" defaultValue={status} className="rounded-lg border border-slate-300 px-3 py-2 text-sm">
+          <select name="status" defaultValue={status} className="rounded-lg border border-ink/20 px-3 py-2 text-sm">
             <option value="">Any status</option>
             <option value="active">Active</option>
             <option value="paused">Paused</option>
@@ -67,7 +67,7 @@ export default async function MyQrCodes({ searchParams }: PageProps<"/dashboard"
         </form>
 
         {rows.length === 0 ? (
-          <div className="mt-6 rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center">
+          <div className="mt-6 rounded-xl border border-dashed border-ink/20 bg-white p-12 text-center">
             <p className="font-semibold">{total ? "No QR codes match these filters." : "You haven't created any QR codes yet."}</p>
             <Link href="/dashboard/new" className="mt-3 inline-block text-sm font-semibold text-brand">
               Create your first QR code →
@@ -78,7 +78,7 @@ export default async function MyQrCodes({ searchParams }: PageProps<"/dashboard"
             {rows.map((r) => {
               const dynamic = !isStatic(r.type);
               return (
-                <li key={r.id} className="flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4">
+                <li key={r.id} className="flex flex-wrap items-center gap-4 rounded-lg border border-ink/10 bg-white p-4">
                   <QrThumb data={qrData(r, origin)} design={r.design} name={r.name} />
                   <div className="min-w-48 flex-1">
                     <div className="flex items-center gap-2">
@@ -139,7 +139,7 @@ export default async function MyQrCodes({ searchParams }: PageProps<"/dashboard"
       </div>
 
       <aside className="space-y-4">
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
+        <div className="rounded-lg border border-ink/10 bg-white p-4">
           <h2 className="text-sm font-semibold">Folders</h2>
           <ul className="mt-2 space-y-0.5 text-sm">
             <li>
@@ -156,7 +156,7 @@ export default async function MyQrCodes({ searchParams }: PageProps<"/dashboard"
             ))}
           </ul>
           <form action={createFolder} className="mt-3 flex gap-1">
-            <input name="name" placeholder="New folder" required className="min-w-0 flex-1 rounded-lg border border-slate-300 px-2 py-1.5 text-sm" />
+            <input name="name" placeholder="New folder" required className="min-w-0 flex-1 rounded-lg border border-ink/20 px-2 py-1.5 text-sm" />
             <button className="rounded-lg bg-slate-900 px-3 text-sm text-white">Add</button>
           </form>
           {current && (

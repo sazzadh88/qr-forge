@@ -7,11 +7,11 @@ import { DEFAULT_DESIGN, type Design } from "@/lib/design";
 import { saveQr, saveTemplate } from "@/lib/actions";
 import ContentForm from "./qr/ContentForm";
 import DesignPanel from "./qr/DesignPanel";
-import Preview, { Step } from "./qr/Preview";
+import Preview, { SectionHead } from "./qr/Preview";
 import { TypeIcon } from "./icons";
 
 type Initial = { id: number; name: string; slug: string; folderId: number | null; content: Record<string, unknown>; design: Design; hasPassword: boolean };
-const input = "w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
+const input = "w-full rounded-lg border border-ink/20 px-3 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
 
 export default function Editor({
   type,
@@ -65,8 +65,8 @@ export default function Editor({
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_300px]">
         <div className="min-w-0 space-y-4">
-          <section className="rounded-xl bg-white p-5 sm:p-8">
-            <Step n={1} title="Complete the content" />
+          <section className="rounded-lg border border-ink/10 bg-white p-5 sm:p-8">
+            <SectionHead label="Content" title={TYPES[type].hint} />
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <label className="block text-sm font-medium">
                 QR code name <span className="text-red-500">*</span>
@@ -112,9 +112,9 @@ export default function Editor({
             )}
           </section>
 
-          <section className="rounded-xl bg-white p-5 sm:p-8">
+          <section className="rounded-lg border border-ink/10 bg-white p-5 sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <Step n={2} title="Design your QR" />
+              <SectionHead label="Style" title="Make it yours" />
               <div className="flex gap-2">
                 {templates.length > 0 && (
                   <select
@@ -123,7 +123,7 @@ export default function Editor({
                       const t = templates.find((x) => x.id === Number(e.target.value));
                       if (t) setDesign({ ...DEFAULT_DESIGN, ...t.design });
                     }}
-                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                    className="rounded-lg border border-ink/20 px-3 py-2 text-sm"
                   >
                     <option value="">Apply template…</option>
                     {templates.map((t) => (
@@ -141,7 +141,7 @@ export default function Editor({
                     await saveTemplate(n, design);
                     setNote(`Saved template “${n}”.`);
                   }}
-                  className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium hover:border-brand hover:text-brand"
+                  className="rounded-lg border border-ink/20 px-3 py-2 text-sm font-medium hover:border-brand hover:text-brand"
                 >
                   Save as template
                 </button>
@@ -155,11 +155,11 @@ export default function Editor({
         </div>
 
         <Preview data={data} design={design} name={name || "qr-code"}>
-          {error && <p className="mt-4 w-full rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-          <button onClick={save} disabled={pending} className="mt-4 w-full rounded-full bg-brand py-3 text-sm font-semibold text-white hover:bg-brand-600 disabled:opacity-60">
+          {error && <p className="mt-4 w-full rounded-md bg-red-100 px-3 py-2 text-sm text-red-800">{error}</p>}
+          <button onClick={save} disabled={pending} className="mt-4 w-full rounded-md bg-ember py-3 text-sm font-semibold text-ink hover:bg-ember-600 hover:text-paper disabled:opacity-60">
             {pending ? "Saving…" : initial ? "Save changes" : "Create QR code"}
           </button>
-          {dynamic && !initial && <p className="mt-2 text-center text-xs text-slate-500">The final short link is assigned when you save.</p>}
+          {dynamic && !initial && <p className="mt-2 text-center text-xs text-paper/50">The final short link is assigned when you save.</p>}
         </Preview>
       </div>
     </div>

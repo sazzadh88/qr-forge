@@ -39,7 +39,7 @@ export default async function Analytics({ searchParams }: PageProps<"/dashboard/
           <p className="text-sm text-slate-500">{qr ? qr.name : "All dynamic QR codes"}</p>
         </div>
         <form className="flex flex-wrap gap-2">
-          <select name="qr" defaultValue={qr?.id ?? ""} className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm">
+          <select name="qr" defaultValue={qr?.id ?? ""} className="rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm">
             <option value="">All QR codes</option>
             {qrs.map((q) => (
               <option key={q.id} value={q.id}>
@@ -47,7 +47,7 @@ export default async function Analytics({ searchParams }: PageProps<"/dashboard/
               </option>
             ))}
           </select>
-          <select name="days" defaultValue={days} className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm">
+          <select name="days" defaultValue={days} className="rounded-lg border border-ink/20 bg-white px-3 py-2 text-sm">
             {RANGES.map((r) => (
               <option key={r} value={r}>
                 Last {r} days
@@ -64,7 +64,7 @@ export default async function Analytics({ searchParams }: PageProps<"/dashboard/
         <Stat label="Avg. per day" value={Math.round((totals.total / days) * 10) / 10} />
       </div>
 
-      <section className="mt-4 rounded-xl border border-slate-200 bg-white p-5">
+      <section className="mt-4 rounded-lg border border-ink/10 bg-white p-5">
         <h2 className="font-semibold">Scans per day</h2>
         {totals.total === 0 ? (
           <p className="py-12 text-center text-sm text-slate-500">No scans in this period yet. Scan one of your dynamic codes to see data here.</p>
@@ -90,7 +90,7 @@ export default async function Analytics({ searchParams }: PageProps<"/dashboard/
         <Breakdown title="Operating system" rows={by("os")} total={totals.total} />
         <Breakdown title="Device" rows={by("device")} total={totals.total} />
         <Breakdown title="Browser" rows={by("browser")} total={totals.total} />
-        <section className="rounded-xl border border-slate-200 bg-white p-5">
+        <section className="rounded-lg border border-ink/10 bg-white p-5">
           <h2 className="font-semibold">Top QR codes</h2>
           <ul className="mt-3 space-y-2 text-sm">
             {top.map((t) => (
@@ -111,7 +111,7 @@ export default async function Analytics({ searchParams }: PageProps<"/dashboard/
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5">
+    <div className="rounded-lg border border-ink/10 bg-white p-5">
       <p className="text-sm text-slate-500">{label}</p>
       <p className="mt-1 text-3xl font-bold">{value}</p>
     </div>
@@ -120,7 +120,7 @@ function Stat({ label, value }: { label: string; value: number }) {
 
 function Breakdown({ title, rows, total }: { title: string; rows: { k: string; n: number }[]; total: number }) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5">
+    <section className="rounded-lg border border-ink/10 bg-white p-5">
       <h2 className="font-semibold">{title}</h2>
       <ul className="mt-3 space-y-3 text-sm">
         {rows.map((r) => (

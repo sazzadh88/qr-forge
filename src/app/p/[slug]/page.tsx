@@ -38,7 +38,7 @@ export default async function Hosted({ params, searchParams }: PageProps<"/p/[sl
           <p className="text-sm text-slate-600">Enter the password to continue.</p>
           <input type="hidden" name="slug" value={slug} />
           {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{String(error)}</p>}
-          <input name="password" type="password" required autoFocus className="w-full rounded-lg border border-slate-300 px-3 py-2.5" />
+          <input name="password" type="password" required autoFocus className="w-full rounded-lg border border-ink/20 px-3 py-2.5" />
           <Button color={color} as="button">Unlock</Button>
         </form>
       </Shell>
@@ -55,12 +55,14 @@ export default async function Hosted({ params, searchParams }: PageProps<"/p/[sl
 
 function Shell({ color, children }: { color: string; children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-100">
-      <div className="h-44" style={{ background: color }} />
-      <main className="mx-auto -mt-32 max-w-md px-4 pb-12">
-        <div className="rounded-3xl bg-white p-6 shadow-xl">{children}</div>
-        <p className="mt-6 text-center text-xs text-slate-400">
-          Made with{" "}
+    <div className="min-h-screen bg-paper">
+      <main className="mx-auto max-w-md px-4 py-10">
+        <div className="overflow-hidden rounded-lg border border-ink/10 bg-white shadow-xl shadow-ink/10">
+          <div className="h-2" style={{ background: color }} />
+          <div className="p-6">{children}</div>
+        </div>
+        <p className="mt-6 text-center text-xs text-ink-600/70">
+          Served by{" "}
           <Link href="/" className="font-semibold">
             QRForge
           </Link>
@@ -94,7 +96,7 @@ function Button({ href, color, children, as, outline }: { href?: string | null; 
 function Heading({ title, text, img, round }: { title: string; text?: string; img?: string; round?: boolean }) {
   return (
     <div className="text-center">
-      {img && <img src={img} alt="" className={`mx-auto mb-4 object-cover ${round ? "size-28 rounded-full" : "max-h-48 w-full rounded-2xl"}`} />}
+      {img && <img src={img} alt="" className={`mx-auto mb-4 object-cover ${round ? "size-28 rounded-full" : "max-h-48 w-full rounded-lg"}`} />}
       {title && <h1 className="text-2xl font-bold">{title}</h1>}
       {text && <p className="mt-2 whitespace-pre-line text-slate-600">{text}</p>}
     </div>
@@ -245,7 +247,7 @@ function Body({ type, c, color }: { type: QrType; c: C; color: string }) {
     case "coupon":
       return (
         <div className="space-y-5 text-center">
-          {f(c, "image") && <img src={f(c, "image")} alt="" className="max-h-48 w-full rounded-2xl object-cover" />}
+          {f(c, "image") && <img src={f(c, "image")} alt="" className="max-h-48 w-full rounded-lg object-cover" />}
           <p className="text-sm font-semibold tracking-wide text-slate-500 uppercase">{s(c, "company")}</p>
           <h1 className="text-3xl font-extrabold" style={{ color }}>
             {s(c, "title")}
@@ -273,7 +275,7 @@ function Body({ type, c, color }: { type: QrType; c: C; color: string }) {
     case "product":
       return (
         <div className="space-y-5">
-          {f(c, "image") && <img src={f(c, "image")} alt="" className="w-full rounded-2xl object-cover" />}
+          {f(c, "image") && <img src={f(c, "image")} alt="" className="w-full rounded-lg object-cover" />}
           <div>
             <p className="text-sm text-slate-500">{s(c, "brand")}</p>
             <h1 className="text-2xl font-bold">{s(c, "name")}</h1>

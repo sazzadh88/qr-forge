@@ -3,11 +3,12 @@
 import type { Design } from "@/lib/design";
 import { useQr } from "./useQr";
 
-export function Step({ n, title, muted }: { n: number; title: string; muted?: boolean }) {
+// Section heading: small uppercase label plus title, no step numbers.
+export function SectionHead({ label, title, muted }: { label: string; title: string; muted?: boolean }) {
   return (
-    <div className={`flex items-center gap-2 ${muted ? "opacity-60" : ""}`}>
-      <span className="grid size-7 place-items-center rounded-md bg-slate-900 text-sm font-semibold text-white">{n}</span>
-      <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+    <div className={muted ? "opacity-50" : ""}>
+      <p className="eyebrow">{label}</p>
+      <h2 className="mt-1 text-xl font-semibold">{title}</h2>
     </div>
   );
 }
@@ -15,13 +16,14 @@ export function Step({ n, title, muted }: { n: number; title: string; muted?: bo
 export default function Preview({ data, design, name, children }: { data: string; design: Design; name?: string; children?: React.ReactNode }) {
   const { png, download } = useQr(data, design);
   return (
-    <aside className="flex flex-col items-center rounded-xl bg-slate-100 p-6 lg:sticky lg:top-24 lg:self-start">
-      <Step n={3} title="Download your QR" muted={!png} />
-      <div className="mt-8 grid aspect-square w-52 place-items-center rounded-xl bg-white p-3 shadow-lg">
+    <aside className="flex flex-col bg-ink p-6 text-paper lg:sticky lg:top-20 lg:self-start">
+      <p className="eyebrow">Output</p>
+      <div className="mt-4 grid aspect-square place-items-center rounded-md bg-paper p-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        {png ? <img src={png} alt="Your QR code" className="max-h-full max-w-full" /> : <EmptyQr />}
+        {png ? <img src={png} alt="Your QR code" className="max-h-full max-w-full" /> : <EmptyQr className="size-28 text-ink/15" />}
       </div>
-      <div className="mt-6 grid w-full grid-cols-3 gap-2">
+      <p className="mt-3 text-xs text-paper/50">{png ? "Live preview. Scan it with your phone to test." : "Fill in the content to render a code."}</p>
+      <div className="mt-5 grid grid-cols-3 gap-px overflow-hidden rounded-md border border-paper/20">
         {(["png", "jpg", "svg"] as const).map((ext) => (
           <button
             key={ext}
@@ -29,7 +31,7 @@ export default function Preview({ data, design, name, children }: { data: string
             disabled={!png}
             onClick={() => download(ext, name)}
             title={ext === "svg" ? "SVG export does not include the frame" : undefined}
-            className="rounded-full border border-slate-300 bg-white py-2 text-sm font-semibold uppercase text-slate-700 hover:border-brand hover:text-brand disabled:bg-transparent disabled:text-slate-400 disabled:hover:border-slate-300"
+            className="bg-ink-800 py-2.5 text-sm font-semibold uppercase hover:bg-ember hover:text-ink disabled:text-paper/30 disabled:hover:bg-ink-800"
           >
             {ext}
           </button>
@@ -40,9 +42,9 @@ export default function Preview({ data, design, name, children }: { data: string
   );
 }
 
-export function EmptyQr({ className = "size-24" }: { className?: string }) {
+export function EmptyQr({ className = "size-24 text-ink/20" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 21 21" className={`${className} text-slate-300`} fill="currentColor" aria-label="Empty QR code">
+    <svg viewBox="0 0 21 21" className={className} fill="currentColor" aria-label="Empty QR code">
       {[0, 14].map((x) =>
         [0, 14].map((y) => (x === 14 && y === 14 ? null : <path key={`${x}${y}`} d={`M${x} ${y}h7v7h-7zM${x + 1} ${y + 1}v5h5v-5zM${x + 2} ${y + 2}h3v3h-3z`} fillRule="evenodd" />)),
       )}

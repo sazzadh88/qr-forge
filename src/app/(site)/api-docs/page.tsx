@@ -29,7 +29,7 @@ export default function ApiDocs() {
         </p>
         <div className="mt-10 space-y-8">
           {ENDPOINTS.map(([m, path, desc, ex]) => (
-            <div key={m + path} className="rounded-2xl border border-slate-200 p-6">
+            <div key={m + path} className="rounded-lg border border-slate-200 p-6">
               <p className="font-mono text-sm">
                 <span className="mr-2 rounded bg-brand-50 px-2 py-1 font-semibold text-brand">{m}</span>
                 {path}

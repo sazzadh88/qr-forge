@@ -2,12 +2,12 @@ import { requireUser } from "@/lib/auth";
 import { changePassword, deleteAccount, regenerateApiKey, updateProfile } from "@/lib/actions";
 import { ConfirmButton } from "@/components/dash";
 
-const input = "mt-1.5 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm";
-const btn = "rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white hover:bg-brand-600";
+const input = "mt-1.5 w-full rounded-lg border border-ink/20 px-3 py-2.5 text-sm";
+const btn = "rounded-md bg-ink px-5 py-2 text-sm font-semibold text-paper hover:bg-ember hover:text-ink";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-6">
+    <section className="rounded-lg border border-ink/10 bg-white p-6">
       <h2 className="font-semibold">{title}</h2>
       <div className="mt-4">{children}</div>
     </section>

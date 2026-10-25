@@ -1,10 +1,25 @@
 @import "tailwindcss";
 
+/* QRForge identity: ink + paper with an ember accent. Display face for headings, humanist sans for body. */
 @theme inline {
-  --font-sans: var(--font-inter);
-  --color-brand: #1f5bff;
-  --color-brand-600: #1747d6;
-  --color-brand-50: #eef3ff;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-manrope), sans-serif;
+
+  --color-ink: #121417;
+  --color-ink-800: #1c1f24;
+  --color-ink-700: #272b32;
+  --color-ink-600: #3a3f48;
+  --color-paper: #f6f3ee;
+  --color-paper-200: #ebe6dd;
+  --color-ember: #e8632b;
+  --color-ember-600: #cf4f1a;
+  --color-ember-100: #fbe7dc;
+  --color-ember-50: #fdf3ec;
+
+  /* Legacy names used across dashboard pages; remapped to the new accent. */
+  --color-brand: var(--color-ember);
+  --color-brand-600: var(--color-ember-600);
+  --color-brand-50: var(--color-ember-50);
 }
 
 html {
@@ -12,6 +27,30 @@ html {
 }
 
 body {
-  background: #fff;
-  color: #0f172a;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Small uppercase section labels used throughout. */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+}
+
+/* Ink-on-paper hairline grid, used behind the hero and dashboard. */
+.grid-bg {
+  background-image: linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
 }

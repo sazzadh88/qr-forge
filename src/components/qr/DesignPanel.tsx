@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CORNERS, DOTS, FRAMES, LEVELS, type Design, type Frame } from "@/lib/design";
 
-const TABS = ["Frame", "Shape", "Logo", "Level"] as const;
+const TABS = ["Frame", "Pattern", "Logo", "Error correction"] as const;
 const MAX_LOGO = 500_000;
 
 export default function DesignPanel({ design: d, onChange }: { design: Design; onChange: (d: Design) => void }) {
@@ -13,19 +13,19 @@ export default function DesignPanel({ design: d, onChange }: { design: Design; o
 
   return (
     <>
-      <div className="flex gap-1">
+      <div className="inline-flex flex-wrap gap-px overflow-hidden rounded-md border border-ink/15 bg-ink/15">
         {TABS.map((t) => (
           <button
             key={t}
             type="button"
             onClick={() => setTab(t)}
-            className={`rounded-lg px-4 py-2.5 text-sm font-medium ${t === tab ? "bg-brand-50 text-brand" : "text-slate-600 hover:bg-slate-50"}`}
+            className={`px-4 py-2 text-sm font-medium ${t === tab ? "bg-ink text-paper" : "bg-white text-ink-600 hover:bg-paper"}`}
           >
             {t}
           </button>
         ))}
       </div>
-      <div className="mt-3 rounded-xl border border-slate-200 p-4">
+      <div className="mt-4">
         {tab === "Frame" && (
           <>
             <div className="flex flex-wrap gap-3">
@@ -38,12 +38,12 @@ export default function DesignPanel({ design: d, onChange }: { design: Design; o
             {d.frame !== "none" && (
               <label className="mt-4 block max-w-xs text-sm font-medium">
                 Frame text
-                <input value={d.label} maxLength={18} onChange={(e) => set({ label: e.target.value })} className="mt-1.5 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm" />
+                <input value={d.label} maxLength={18} onChange={(e) => set({ label: e.target.value })} className="mt-1.5 w-full rounded-lg border border-ink/20 px-3 py-2 text-sm" />
               </label>
             )}
           </>
         )}
-        {tab === "Shape" && (
+        {tab === "Pattern" && (
           <div className="space-y-4">
             <Row label="Dots">
               {DOTS.map((s) => (
@@ -65,7 +65,7 @@ export default function DesignPanel({ design: d, onChange }: { design: Design; o
           <div className="flex flex-wrap items-center gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {d.logo && <img src={d.logo} alt="Uploaded logo" className="size-16 rounded-lg border object-contain" />}
-            <label className="cursor-pointer rounded-lg border border-dashed border-slate-300 px-4 py-3 text-sm text-slate-600 hover:border-brand">
+            <label className="cursor-pointer rounded-lg border border-dashed border-ink/20 px-4 py-3 text-sm text-slate-600 hover:border-brand">
               {d.logo ? "Replace logo" : "Upload logo (PNG, JPG, WebP · max 500 KB)"}
               <input
                 type="file"
@@ -91,7 +91,7 @@ export default function DesignPanel({ design: d, onChange }: { design: Design; o
             {err && <p className="w-full text-sm text-red-600">{err}</p>}
           </div>
         )}
-        {tab === "Level" && (
+        {tab === "Error correction" && (
           <div className="flex flex-wrap gap-3">
             {LEVELS.map(([v, l]) => (
               <Choice key={v} on={d.level === v} onClick={() => set({ level: v })} text={l} />
@@ -107,7 +107,7 @@ export default function DesignPanel({ design: d, onChange }: { design: Design; o
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+      <p className="mb-2 eyebrow !text-ink-600">{label}</p>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
@@ -119,7 +119,7 @@ function Choice({ on, onClick, text, children }: { on: boolean; onClick: () => v
       type="button"
       onClick={onClick}
       aria-pressed={on}
-      className={`rounded-lg border px-3 py-2 text-sm capitalize ${on ? "border-brand bg-brand-50 text-brand" : "border-slate-200 text-slate-700 hover:border-slate-300"}`}
+      className={`rounded-md border px-3 py-2 text-sm capitalize ${on ? "border-ink bg-ink text-paper" : "border-ink/15 text-ink-600 hover:border-ink/40"}`}
     >
       {children ?? text}
     </button>
@@ -138,13 +138,13 @@ function ColorInput({ label, value, onChange }: { label: string; value: string; 
 function FrameThumb({ frame }: { frame: Frame }) {
   if (frame === "none")
     return (
-      <svg viewBox="0 0 48 56" className="h-14 w-12 text-brand" fill="none" stroke="currentColor" strokeWidth="3" aria-label="No frame">
+      <svg viewBox="0 0 48 56" className="h-14 w-12 text-ember" fill="none" stroke="currentColor" strokeWidth="3" aria-label="No frame">
         <circle cx="24" cy="28" r="14" />
         <path d="M14 18l20 20" />
       </svg>
     );
   return (
-    <svg viewBox="0 0 48 56" className="h-14 w-12 text-slate-500" aria-label={`${frame} frame`}>
+    <svg viewBox="0 0 48 56" className="h-14 w-12 text-current" aria-label={`${frame} frame`}>
       {frame === "badge" ? (
         <>
           <rect x="4" y="2" width="40" height="40" rx="6" fill="none" stroke="currentColor" strokeWidth="3" />

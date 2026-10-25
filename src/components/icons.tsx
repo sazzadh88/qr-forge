@@ -30,11 +30,22 @@ export function TypeIcon({ type, className = "size-5" }: { type: QrType; classNa
   );
 }
 
-export function Logo() {
+// Anvil-and-spark mark; `dark` renders for use on light backgrounds.
+export function Logo({ dark }: { dark?: boolean }) {
   return (
     <svg viewBox="0 0 32 32" className="size-8" aria-hidden>
-      <rect width="32" height="32" rx="8" className="fill-brand" />
-      <path d="M8 8h7v7H8zM17 17h7v7h-7zM17 8h3v3h-3zM21 12h3v3h-3zM8 17h3v3H8zM12 21h3v3h-3z" fill="#fff" />
+      <rect width="32" height="32" rx="6" className={dark ? "fill-ink" : "fill-ember"} />
+      <path d="M7 19h18l-3 4H10zM9 12h14v4H9zM19 7h4v5h-4z" fill={dark ? "#f6f3ee" : "#121417"} />
+      <circle cx="10" cy="8" r="1.6" fill={dark ? "#e8632b" : "#f6f3ee"} />
     </svg>
+  );
+}
+
+export function Wordmark({ dark, className = "" }: { dark?: boolean; className?: string }) {
+  return (
+    <span className={`flex items-center gap-2.5 font-display text-lg font-bold tracking-tight ${className}`}>
+      <Logo dark={dark} />
+      QR<span className="text-ember">Forge</span>
+    </span>
   );
 }

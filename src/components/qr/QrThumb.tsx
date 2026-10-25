@@ -15,7 +15,7 @@ export default function QrThumb({ data, design, name, downloads = true }: { data
       </div>
       {downloads && png && (
         <details className="relative">
-          <summary className="cursor-pointer list-none rounded-full bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-600">Download</summary>
+          <summary className="cursor-pointer list-none rounded-md bg-ink px-3 py-1.5 text-xs font-semibold text-paper hover:bg-ember hover:text-ink">Download</summary>
           <div className="absolute z-10 mt-1 w-24 rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
             {(["png", "jpg", "svg"] as const).map((ext) => (
               <button key={ext} type="button" onClick={() => download(ext, name)} className="block w-full px-3 py-1.5 text-left text-sm uppercase hover:bg-slate-50">

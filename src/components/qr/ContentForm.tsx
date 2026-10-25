@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TYPES, type Field, type QrType } from "@/lib/payload";
 
 type Value = Record<string, unknown>;
-const cls = "w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
+const cls = "w-full rounded-lg border border-ink/20 px-3 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/20";
 
 async function upload(file: File): Promise<string> {
   const fd = new FormData();
@@ -97,7 +97,7 @@ function Uploader({ f, value, onChange }: { f: Field; value: unknown; onChange: 
           ))}
         </div>
       )}
-      <label className="inline-block cursor-pointer rounded-lg border border-dashed border-slate-300 px-4 py-3 text-sm font-normal text-slate-600 hover:border-brand">
+      <label className="inline-block cursor-pointer rounded-lg border border-dashed border-ink/20 px-4 py-3 text-sm font-normal text-slate-600 hover:border-brand">
         {busy ? "Uploading…" : multi ? "Add files" : list.length ? "Replace file" : "Upload file"}
         <input
           type="file"
@@ -144,7 +144,7 @@ function Repeat({ f, value, onChange }: { f: Field; value: unknown; onChange: (v
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => onChange([...rows, {}])} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:border-brand hover:text-brand">
+      <button type="button" onClick={() => onChange([...rows, {}])} className="rounded-lg border border-ink/20 px-3 py-2 text-sm font-medium text-slate-700 hover:border-brand hover:text-brand">
         + Add
       </button>
     </div>

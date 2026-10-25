@@ -19,7 +19,7 @@ export default async function NewQr({ searchParams }: PageProps<"/dashboard/new"
           <p className="text-sm text-slate-500">{desc}</p>
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {types.map((t) => (
-              <Link key={t} href={`/dashboard/new/${t}${qs}`} className="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-brand hover:shadow-md">
+              <Link key={t} href={`/dashboard/new/${t}${qs}`} className="rounded-lg border border-ink/10 bg-white p-4 transition hover:border-brand hover:shadow-md">
                 <span className="grid size-10 place-items-center rounded-lg bg-brand-50 text-brand">
                   <TypeIcon type={t} />
                 </span>
