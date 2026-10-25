@@ -43,3 +43,10 @@ next-env.d.ts
 # app data (sqlite db + uploads)
 /data
 /.claude/test-credentials.md
+
+# markdown notes (README is the only tracked .md)
+*.md
+!README.md
+
+# claude code session files
+/.claude
